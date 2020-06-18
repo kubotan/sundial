@@ -26,8 +26,24 @@ Contributions: schollz, HankB
 */
 
 /*
+curl -O https://raw.githubusercontent.com/kubotan/sundial/master/test/sundail.c
 $ gcc -Wall -o sundial -Wall sundial.c -lm
 Usage: ./sundial 35.689521 139.691704 `date +%s`   # Tokyo
+
+
+
+#!/bin/bash
+
+isDay=`./sundial 35.690 139.692`
+if [ $isDay -eq 0 ]
+then
+  echo "night"
+else
+  echo "day"
+fi
+
+
+
 
 北海道,latitude:43.063968,longitude:141.347899
 青森県,latitude:40.824623,longitude:140.740593
