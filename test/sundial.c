@@ -28,7 +28,7 @@ Contributions: schollz, HankB
 /*
 $ mkdir -p ~/sundial
 $ cd sundial/
-$ curl -O https://raw.githubusercontent.com/kubotan/sundial/master/test/sundail.c
+$ curl -O https://raw.githubusercontent.com/kubotan/sundial/master/test/sundial.c
 $ gcc -Wall -o sundial -Wall sundial.c -lm
 $ cp ./sundial /usr/local/bin/
 Usage: ./sundial 35.689521 139.691704 `date +%s`   # Tokyo
