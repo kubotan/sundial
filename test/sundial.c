@@ -26,6 +26,8 @@ Contributions: schollz, HankB
 */
 
 /*
+$ mkdir -p ~/sundial
+$ cd sundial/
 $ curl -O https://raw.githubusercontent.com/kubotan/sundial/master/test/sundail.c
 $ gcc -Wall -o sundial -Wall sundial.c -lm
 $ cp ./sundial /usr/local/bin/
