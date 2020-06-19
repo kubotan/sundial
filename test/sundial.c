@@ -121,12 +121,13 @@ double const JEPOCH = 2451545.0;
 double const UEPOCH = 946728000.0;
 
 int main(int argc, char **argv) {
-  double TIME;
+  double CURRENTTIME;
+  double NOW;
   double LAT;
   double LONG;
   double SUNRISE;
   double SUNSET;
-  //struct tm ts;
+  struct tm ts;
   //char buf[80];
   time_t cur;
   if (3 <= argc && argc <= 4) {
@@ -134,33 +135,37 @@ int main(int argc, char **argv) {
     LONG = strtod(argv[2], NULL);
     
     if (argc == 4) {
-        TIME = strtod(argv[3], NULL);
+        CURRENTTIME = strtod(argv[3], NULL);
     } else {
-        TIME = getTime(time(NULL));
+        cur = time(NULL);
+        ts = *gmtime(&cur);
+        ts.tm_sec = 0;
+        ts.tm_min =0;
+        ts.tm_hour = 0;
+        cur = mktime(&ts);
+        CURRENTTIME = getTime(cur);
     }
     //printf("%2.3f, %2.3f\n",LAT,LONG);
 
-    cur = TIME;
-    //ts = *localtime(&cur);
-    //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", &ts);
-    //printf("Currenttime: %s\n", buf);
+    //cur = CURRENTTIME;
+    //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", localtime(&cur));
+    //printf("StartOfDay: %s\n", buf);
 
-    cur = sunrise(LAT,LONG,0,TIME);
+    cur = sunrise(LAT,LONG,0,CURRENTTIME);
     SUNRISE = getTime(cur);
-    //ts = *localtime(&cur);
-    //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", &ts);
+    //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", localtime(&cur));
     //printf("Sunrise: %s\n", buf); // long, lat for Durham, NC
 
-    cur = sunset(LAT,LONG,0,TIME);
+    cur = sunset(LAT,LONG,0,CURRENTTIME);
     SUNSET = getTime(cur);
-    //ts = *localtime(&cur);
-    //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", &ts);
+    //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", localtime(&cur));
     //printf("Sunset: %s\n", buf);
 
-    if(SUNRISE <= TIME && TIME <= SUNSET) {
-        printf("1\n");
+    NOW = getTime(time(NULL));
+    if(SUNRISE <= NOW && NOW <= SUNSET) {
+        printf("1");
     }else{
-        printf("0\n");
+        printf("0");
     }
 
   } else {
