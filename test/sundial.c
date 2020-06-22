@@ -122,7 +122,7 @@ double const UEPOCH = 946728000.0;
 
 int main(int argc, char **argv) {
   double CURRENTTIME;
-  double NOW;
+  //double NOW;
   double LAT;
   double LONG;
   double SUNRISE;
@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
         CURRENTTIME = strtod(argv[3], NULL);
     } else {
         cur = time(NULL);
-        ts = *gmtime(&cur);
+        ts = *localtime(&cur);
         ts.tm_sec = 0;
         ts.tm_min =0;
         ts.tm_hour = 0;
@@ -161,12 +161,7 @@ int main(int argc, char **argv) {
     //strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:%S", localtime(&cur));
     //printf("Sunset: %s\n", buf);
 
-    NOW = getTime(time(NULL));
-    if(SUNRISE <= NOW && NOW <= SUNSET) {
-        printf("1");
-    }else{
-        printf("0");
-    }
+    printf("%2.0f,%2.0f\n",SUNRISE,SUNSET);
 
   } else {
     printf("usage: sundial LAT LONG TIMESTAMP\n\nexample: sundial 35.690 139.692 1592501413    # Tokyo 2020/06/19 02:30:28\n");
