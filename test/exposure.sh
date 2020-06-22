@@ -4,7 +4,7 @@
 # v4l2-ctl -d /dev/video0 --list-ctrls-menu
 
 OFFSET=$((30 * 60))
-SUNDIAL=`./sundial 35.690 139.692`
+SUNDIAL=`/usr/local/bin/sundial 35.690 139.692`
 SUNRISE=`echo $SUNDIAL | cut -d ',' -f 1`
 SUNSET=`echo $SUNDIAL | cut -d ',' -f 2`
 NOW=`date +%s`
